@@ -1,8 +1,3 @@
 theme: jekyll-theme-slate
 title: Welcome to Pierre Prandi's homepage
 description: this is mainly a convenient way to share more than code
-defaults:
-  - scope:
-    path: "pdf"
-  values:
-    pdf: true

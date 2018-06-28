@@ -6,4 +6,4 @@ I'm working as a R&D engineer in oceanography from space, my profesional interes
 * data viz,
 * statistics and machine learning.
 
-You can find curriculum [in english](https://www.google.com)
+You can find curriculum <embed src="https://pierre-prandi.github.io/cv.pdf" type="application/pdf" />

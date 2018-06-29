@@ -1,5 +1,3 @@
-## Pierre Prandi's homepage
-
 I'm working as a R&D engineer in oceanography from space, my profesional interests lie in
 * remote sensing of the ocean,
 * climate dynamics,

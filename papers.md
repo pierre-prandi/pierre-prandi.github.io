@@ -1,1 +1,5 @@
-you can find below a list of publications in peer-reviewed journals,
+---
+title: papers
+layout: post
+---
+Below is a list of publications in peer-reviewed journals,

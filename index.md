@@ -4,4 +4,4 @@ I'm working as a R&D engineer in oceanography from space, my profesional interes
 * data viz,
 * statistics and machine learning.
 
-You can find [an english resume here]({{ site.url }}/pdf/cv_prandi.pdf), as well as  a list of [papers]({{ site.url }}/papers).
+You can find [an english resume here]({{ site.url }}/pdf/cv_en.pdf), as well as  a list of [papers]({{ site.url }}/papers).

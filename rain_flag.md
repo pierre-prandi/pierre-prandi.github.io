@@ -40,4 +40,4 @@ One issue with this algorithm is that it may misinterpret other events (such as 
 
 ## simple ML algorithms are good for 1Hz data
 
-## things get a bit more complicated at 
+## things get a bit more complicated at 40Hz

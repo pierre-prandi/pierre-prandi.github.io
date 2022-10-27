@@ -67,7 +67,7 @@ One issue with this algorithm is that it may misinterpret other events (such as 
 
 <figure>
     <img src="docs/assets/rain_flag/TableStats2Grid_AL_PcentTeVar.png"  style="display: block; margin: auto;"/>
-    <figcaption>*percentage of flagged data, according to the product flag*</figcaption>
+    <figcaption>percentage of flagged data, according to the product flag</figcaption>
 </figure>
 
 For example the yellow line around Antarctica in the map above is linked to zero-crossings of reaction wheel speed on SARAL which led to small mispointing events.
@@ -96,7 +96,7 @@ Looking at the geographical distribution of measurements classified as rain even
 We've also performed an assessment of what performance improvement one could get by removing measurements impacted by rain by computing the variance of SSH differences at crossovers:
 
 <figure>
-    <img src="docs/assets/rain_flag/variance_increase.png"  style="display: block; margin: auto;"/>
+    <img src="docs/assets/rain_flag/variance\ increase.png"  style="display: block; margin: auto;"/>
     <figcaption>Variance of SSH differences increase (negative values mean the variance has decreased) when removing rain events as predicted by different algorithms. </figcaption>
 </figure>
  

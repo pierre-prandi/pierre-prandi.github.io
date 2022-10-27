@@ -96,7 +96,7 @@ Looking at the geographical distribution of measurements classified as rain even
 We've also performed an assessment of what performance improvement one could get by removing measurements impacted by rain by computing the variance of SSH differences at crossovers:
 
 <figure>
-    <img src="docs/assets/rain_flag/variance\ increase.png"  style="display: block; margin: auto;"/>
+    <img src="docs/assets/rain_flag/variance_increase.png"  style="display: block; margin: auto;"/>
     <figcaption>Variance of SSH differences increase (negative values mean the variance has decreased) when removing rain events as predicted by different algorithms. </figcaption>
 </figure>
  

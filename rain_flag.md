@@ -67,13 +67,51 @@ One issue with this algorithm is that it may misinterpret other events (such as 
 
 <figure>
     <img src="docs/assets/rain_flag/TableStats2Grid_AL_PcentTeVar.png"  style="display: block; margin: auto;"/>
-    <figcaption>*percentage of edited data, according to the product flag*</figcaption>
+    <figcaption>*percentage of flagged data, according to the product flag*</figcaption>
 </figure>
 
 For example the yellow line around Antarctica in the map above is linked to zero-crossings of reaction wheel speed on SARAL which led to small mispointing events.
 
-The current product flag is used as a reference when benchmarking our ML/AI classifiers.
+The product flag is used as a reference when benchmarking our ML/AI classifiers.
 
 ## simple ML algorithms are good for 1Hz data
+
+We tested a variety of methods from the ML toolbox, combined with different choices for features to be used as predictors.
+Implementations were taken [scikit-learn](https://scikit-learn.org/stable/).
+
+Among the features used of of course the retracking outputs (backscatter, waves) and the variability within the 40 high rate measurements used to construct the 1Hz measurement (stddev of range, swh and backscatter).
+Some experiments included brightness temperatures from the MWR onboard SARAL. 
+
+Results from these experiments show that we are able to train rain classifiers that are more specific than the matching puirsuit flag that is available in the product. 
+Even with simple algorithms such as [KNN](https://ieeexplore.ieee.org/abstract/document/549118).
+Inlcuding MWR brightness temperatures as features helps of course, but even without this info, the classifiers exhibit good precision levels (> 0.8).
+
+Looking at the geographical distribution of measurements classified as rain events shows that it is much more consistent with rain distribution:
+
+<figure>
+    <img src="docs/assets/rain_flag/TableStats2Grid_AL_Pluie_KNN.png"  style="display: block; margin: auto;"/>
+    <figcaption>percentage of edited data, based on a KNN classifier</figcaption>
+</figure>
+
+We've also performed an assessment of what performance improvement one could get by removing measurements impacted by rain by computing the variance of SSH differences at crossovers:
+
+<figure>
+    <img src="docs/assets/rain_flag/variance_increase.png"  style="display: block; margin: auto;"/>
+    <figcaption>Variance of SSH differences increase (negative values mean the variance has decreased) when removing rain events as predicted by different algorithms. </figcaption>
+</figure>
+ 
+The figure includes the standard Cal/Val flagging process (in green), the colocated rain flag (in purple) and the matching pursuit flag (in red). 
+ML classifiers or on par or better than the matching puisuit flag. 
+Variance reduction at crossovers needs to be balanced with the number of edited data:
+
+<figure>
+    <img src="docs/assets/rain_flag/08_editing.png"  style="display: block; margin: auto;"/>
+    <figcaption>percentage of edited data for different classifiers</figcaption>
+</figure>
+
+It's clear that the improvement brought by the matching pursuit comes at the cost of removing more than 10% of the data (in red). In contrast all our ML classifiers (in blue) remove around 6% of the data.
+As a reference the standard Cal/Val flag is provided in green.
+
+So even simple ML algorithms are able to provide more specific rain detectors that provide comparable mission performance gains while removing less data than the matching pursuit flag currently available in SARAL/AltiKa GDR-F products.
 
 ## things get a bit more complicated at 40Hz

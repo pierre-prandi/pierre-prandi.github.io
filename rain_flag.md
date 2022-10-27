@@ -36,7 +36,7 @@ One issue with this algorithm is that it may misinterpret other events (such as 
 
 ### setting up the experiment
 
-![rain rate colocation map](/pierre-prandi.github.io/assets/rain_flag/TableStats2Grid_AL_TimeLagFraction.png)
+<img src="docs/assets/rain_flag/TableStats2Grid_AL_TimeLagFraction.png"  style="display: block; margin: auto;"/> 
 
 
 ## simple ML algorithms are good for 1Hz data

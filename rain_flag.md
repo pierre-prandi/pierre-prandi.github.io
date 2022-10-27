@@ -24,6 +24,8 @@ SARAL/AltiKa was launched in 2013. Its a cooperative mission between [CNES](http
 <img src="https://altika-saral.cnes.fr/sites/default/files/styles/large/public/drupal/201506/image/bpc_saral-illustration_p43253.jpg?itok=SUp2HY_4" style="display: block; margin: auto;" />
 
 The Ka-band is more [sensitive to rain](http://www.satmagazine.com/story.php?number=2058631290) and is therefore a perfect candidate: larger impacts should be easier to detect.
+Originally this was even a foreseen issue on SARAL: due to the senstivity of the Ka-band, how large would be the fraction of measurements lost (or too attenuated) ? 
+Thanks to large margins on the altimeter link budget at design stage, this was in practice not an issue and SARAL/AltiKa's data availability rates are above mission requirements today.
 
 ## experiment
 
@@ -32,18 +34,25 @@ The Ka-band is more [sensitive to rain](http://www.satmagazine.com/story.php?num
 Rain rates are extracted from SSMIS aboard DSMP F-16, F-17 and WindSat radiometer data records. We colocated those data to SARAL/AltiKa measurements within 5 minutes. 
 The colocation pattern is driven by orbital constraints and results in a typical geographical pattern shown below:
 
-<img src="docs/assets/rain_flag/TableStats2Grid_AL_TimeLagFraction.png"  style="display: block; margin: auto;"/> 
+<figure>
+    <img src="docs/assets/rain_flag/TableStats2Grid_AL_TimeLagFraction.png"  style="display: block; margin: auto;"/> 
+    <figcaption>*fraction of colocated SARAL/AltiKa measurements with a time difference below 5 minutes*</figcaption>
+</figure>
 
 Averaging rain rates over a long period provides an overview of the rain distribution over the oceanic domain:
 
-<img src="docs/assets/rain_flag/TableStats2Grid_AL_RainfallRate.png"  style="display: block; margin: auto;"/> 
-
+<figure>
+    <img src="docs/assets/rain_flag/TableStats2Grid_AL_RainfallRate.png"  style="display: block; margin: auto;"/> 
+    <figcaption>*Average rainfall rate over ocean from colocations to SARAL/AltiKa measurements*</figcaption>
+</figure>
 Rain is mainly present in the [ITCZ](https://en.wikipedia.org/wiki/Intertropical_Convergence_Zone) region and midlatitudes of norhern and southern hemispheres. Rather than predict rainfall rate, we try to predict the presence of rain (in an attempt to smplify the problem).
 We therefore estimate a boolean rain flag (rain/non rain) which set to True (rain) is the colocated rainfall rate is positive.
 The resulting map of the ratio of 'rainy' SARAL/AltiKa measurements is shown below:
 
-<img src="docs/assets/rain_flag/TableStats2Grid_AL_RainFraction.png"  style="display: block; margin: auto;"/> 
-
+<figure>
+    <img src="docs/assets/rain_flag/TableStats2Grid_AL_RainFraction.png"  style="display: block; margin: auto;"/> 
+    <figcaption>Fraction of SARAL/AltiKa measurements detected as 'rainy' based on colocations</figcaption>
+</figure>
 This database is used as a training set for all subsequent supervised learning experiments.
 Note that we did not test the sensitivity of our results to different methods to construct the training set (*e.g.* setting the rain flag above another rainfall rate threshold).
 
@@ -57,10 +66,8 @@ and tuned post-launch to real-world data by [Tournadre et al. (2015)](https://ar
 One issue with this algorithm is that it may misinterpret other events (such as mispointing events) as rain events. And SARAL/AltiKa mispointing events are not rare... 
 
 <figure>
-  
     <img src="docs/assets/rain_flag/TableStats2Grid_AL_PcentTeVar.png"  style="display: block; margin: auto;"/>
-    <figcaption>percentage of edited data, according to the product flag</figcaption>
-
+    <figcaption>*percentage of edited data, according to the product flag*</figcaption>
 </figure>
 
 For example the yellow line around Antarctica in the map above is linked to zero-crossings of reaction wheel speed on SARAL which led to small mispointing events.

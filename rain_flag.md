@@ -1,6 +1,6 @@
 # Detecting rain in satellite radar altimetry measurements
 
-## context
+## context & motivation
 
 For those unfamiliar with satellite radar altimetry, let's just say that we send an instrument (called an altimeter) in space. This instrument sends a radar wave towards the Earth surface and waits for its reflection to come back. A precise clock on board measures this two way travel time which can be converted to a distance.
 
@@ -25,7 +25,30 @@ SARAL/AltiKa was launched in 2013. Its a cooperative mission between [CNES](http
 
 The Ka-band is more [sensitive to rain](http://www.satmagazine.com/story.php?number=2058631290) and is therefore a perfect candidate: larger impacts should be easier to detect.
 
-### current algorithms for SARAL rain flagging
+## experiment
+
+### rain rates over the ocean
+
+Rain rates are extracted from SSMIS aboard DSMP F-16, F-17 and WindSat radiometer data records. We colocated those data to SARAL/AltiKa measurements within 5 minutes. 
+The colocation pattern is driven by orbital constraints and results in a typical geographical pattern shown below:
+
+<img src="docs/assets/rain_flag/TableStats2Grid_AL_TimeLagFraction.png"  style="display: block; margin: auto;"/> 
+
+Averaging rain rates over a long period provides an overview of the rain distribution over the oceanic domain:
+
+<img src="docs/assets/rain_flag/TableStats2Grid_AL_RainfallRate.png"  style="display: block; margin: auto;"/> 
+
+Rain is mainly present in the [ITCZ](https://en.wikipedia.org/wiki/Intertropical_Convergence_Zone) region and midlatitudes of norhern and southern hemispheres. Rather than predict rainfall rate, we try to predict the presence of rain (in an attempt to smplify the problem).
+We therefore estimate a boolean rain flag (rain/non rain) which set to True (rain) is the colocated rainfall rate is positive.
+The resulting map of the ratio of 'rainy' SARAL/AltiKa measurements is shown below:
+
+<img src="docs/assets/rain_flag/TableStats2Grid_AL_RainFraction.png"  style="display: block; margin: auto;"/> 
+
+This database is used as a training set for all subsequent supervised learning experiments.
+Note that we did not test the sensitivity of our results to different methods to construct the training set (*e.g.* setting the rain flag above another rainfall rate threshold).
+
+
+### current algorithm for SARAL rain flagging
 
 There is already a rain-detecting algorithm implemented in SARAL/AltiKa processing chains.
 This algorithm relies on the high frequency variablity of the trailing edge of the waveform.
@@ -34,9 +57,8 @@ and tuned post-launch to real-world data by [Tournadre et al. (2015)](https://ar
 
 One issue with this algorithm is that it may misinterpret other events (such as mispointing events) as rain events. And SARAL/AltiKa mispointing events are not rare...
 
-### setting up the experiment
 
-<img src="docs/assets/rain_flag/TableStats2Grid_AL_TimeLagFraction.png"  style="display: block; margin: auto;"/> 
+
 
 
 ## simple ML algorithms are good for 1Hz data

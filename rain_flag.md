@@ -47,7 +47,6 @@ The resulting map of the ratio of 'rainy' SARAL/AltiKa measurements is shown bel
 This database is used as a training set for all subsequent supervised learning experiments.
 Note that we did not test the sensitivity of our results to different methods to construct the training set (*e.g.* setting the rain flag above another rainfall rate threshold).
 
-
 ### current algorithm for SARAL rain flagging
 
 There is already a rain-detecting algorithm implemented in SARAL/AltiKa processing chains.
@@ -55,11 +54,18 @@ This algorithm relies on the high frequency variablity of the trailing edge of t
 This method has been initially designed by [Tournadre (1999)](https://www.academia.edu/28146154/Estimation_of_rainfall_from_Ka_band_altimeter_data_computation_of_waveforms_in_presence_of_rain)
 and tuned post-launch to real-world data by [Tournadre et al. (2015)](https://archimer.ifremer.fr/doc/00286/39674/41519.pdf).
 
-One issue with this algorithm is that it may misinterpret other events (such as mispointing events) as rain events. And SARAL/AltiKa mispointing events are not rare...
+One issue with this algorithm is that it may misinterpret other events (such as mispointing events) as rain events. And SARAL/AltiKa mispointing events are not rare... 
 
+<figure>
+  
+    <img src="docs/assets/rain_flag/TableStats2Grid_AL_PcentTeVar.png"  style="display: block; margin: auto;"/>
+    <figcaption>percentage of edited data, according to the product flag</figcaption>
 
+</figure>
 
+For example the yellow line around Antarctica in the map above is linked to zero-crossings of reaction wheel speed on SARAL which led to small mispointing events.
 
+The current product flag is used as a reference when benchmarking our ML/AI classifiers.
 
 ## simple ML algorithms are good for 1Hz data
 

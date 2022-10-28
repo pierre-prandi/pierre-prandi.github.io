@@ -149,5 +149,13 @@ As for the 1Hz case, we compare the impact on SSHA variance levels of different 
 </figure>
 the matching pursuit flag (labeled 'current flag' above) performs best on this metric (SSHA variance) but at the huge cost of removeing 20% of the data on average. Since rain is unevenly distributed the data availability loss is even larger in some areas.
 
-We also see that one classifier (labeled 'all data BCE loss') using waveforms and other features and a binary cross entropy loss function is able to provide comparable SSHA variance improvement while removing about half the number of measurements with repsect to the matching pursuit flag.
+We also see that one classifier (labeled 'all data BCE loss') using waveforms and other features and a [binary cross entropy](https://ml-cheatsheet.readthedocs.io/en/latest/loss_functions.html) loss function is able to provide comparable SSHA variance improvement while removing about half the number of measurements with respect to the matching pursuit flag.
 
+## conclusions & way forward
+
+In this study we demonstrate that ML/AI algorithms can be useful to detect certain patterns in satellite radar altimetry data. 
+While there is still validation and experiments that we could do, this serves as a proof of concept in a simple case.
+Among things that we could do as a follow up to this study are:
+ - test a similar analyis on an Ku-band mission,
+ - generalize to other sources of errors in altimetry (granted we can construct a ground truth database),
+ - try to perform regressions rather than classification to predict rainfall rate,

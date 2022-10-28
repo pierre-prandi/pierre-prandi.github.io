@@ -115,3 +115,39 @@ As a reference the standard Cal/Val flag is provided in green.
 So even simple ML algorithms are able to provide more specific rain detectors that provide comparable mission performance gains while removing less data than the matching pursuit flag currently available in SARAL/AltiKa GDR-F products.
 
 ## things get a bit more complicated at 40Hz
+
+At 1Hz we were able to train specific rain classifiers, but what happens at 40Hz ? can we achieve similar results à 40Hz using only the waveforms as input ?
+
+To investigate these questions, we built a simple CNN network architecture using [PyTorch](https://pytorch.org/). For the waveform processing section of this architecture, we designed to convolutive blocks whose outputs are then fed to a fully connected network.
+
+<figure>
+    <img src="docs/assets/rain_flag/hr_network_architecture.png"  style="display: block; margin: auto;"/>
+    <figcaption>network architecture layout</figcaption>
+</figure>
+
+We performed several experiments but I'm going to focus here on a case where we use only the waveforms as an input (without brightness temperatures from MWR or retracked parameters for example).
+
+Without any editing applied, SSHA variance looks like the map below:
+<figure>
+    <img src="docs/assets/rain_flag/hr_ssha_variance.png"  style="display: block; margin: auto;"/>
+    <figcaption>40Hz SSHA variance without editing</figcaption>
+</figure>
+some of the features are related to rain patterns.
+
+Removing rain events as predicted from waveforms *only* leads to the following map:
+<figure>
+    <img src="docs/assets/rain_flag/hr_ssha_variance_wf_only.png"  style="display: block; margin: auto;"/>
+    <figcaption>40Hz SSHA variance when removing rain events</figcaption>
+</figure>
+which is a large improvement over rainy areas of the ocean.
+
+As for the 1Hz case, we compare the impact on SSHA variance levels of different classifiers, including the matching pursuit flag and balancing with the number of edited measurements:
+
+<figure>
+    <img src="docs/assets/rain_flag/hr_variance_editing_synthesis.png"  style="display: block; margin: auto;"/>
+    <figcaption>SSHA variance and percentage of edited data for different rain flagging algorithms</figcaption>
+</figure>
+the matching pursuit flag (labeled 'current flag' above) performs best on this metric (SSHA variance) but at the huge cost of removeing 20% of the data on average. Since rain is unevenly distributed the data availability loss is even larger in some areas.
+
+We also see that one classifier (labeled 'all data BCE loss') using waveforms and other features and a binary cross entropy loss function is able to provide comparable SSHA variance improvement while removing about half the number of measurements with repsect to the matching pursuit flag.
+
